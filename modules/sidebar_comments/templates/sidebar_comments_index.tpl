@@ -34,7 +34,14 @@ if($list_comments)
 			$story_url = getmyurl("storyURL", $link->category_safe_names(), urlencode($row->link_title_url), $row->link_id);
 		}
 			$main_smarty->assign('comment_url', $story_url."#c".$row->comment_id);
-			$main_smarty->assign('comment_text', ShortenText(save_text_to_html($row->comment_content)));
+			$z = $row->comment_content;
+			$z = str_replace("[code]","",$z);
+			$z = str_replace("[/code]","",$z);
+			$z = str_replace("[img]","",$z);
+			$z = str_replace("[/img]","",$z);
+			$z = str_replace("[yt]","",$z);
+			$z = str_replace("[/yt]","",$z);
+			$main_smarty->assign('comment_text', ShortenText(save_text_to_html($z)));
 			$main_smarty->assign('Avatar_ImgSmall', get_avatar('small', '', $row->user_login, $row->user_email));
 			$main_smarty->assign('Avatar_ImgLarge', get_avatar('large', '', $row->user_login, $row->user_email));
 			$main_smarty->assign('username', $row->user_login);

@@ -90,6 +90,7 @@ class Comment {
 			$this->link=$link->comment_link_id;
 			$this->karma=$link->comment_karma;
 			$this->parent=$link->comment_parent;
+			
 			$this->content=$link->comment_content;
 			$this->status=$link->comment_status;
 			$this->randkey=$link->comment_randkey;
@@ -167,7 +168,14 @@ class Comment {
 		$text = save_text_to_html($this->content);
 		$vars = array('comment_text' => $text, 'comment_id' => $this->id, 'smarty' => $smarty);
 		check_actions('show_comment_content', $vars); 
-		$smarty->assign('comment_content', $vars['comment_text']); 
+		$z = $vars['comment_text'];
+			$z = str_replace("[code]","<div id='bb_code'>",$z);
+			$z = str_replace("[/code]","</div>",$z);
+				$z = str_replace("[img]","<img src='",$z);
+			$z = str_replace("[/img]","' style='max-width:400px; max-height:400px;'/>",$z);
+			$z = str_replace("[yt]","<iframe width='500' height='300' src='//www.youtube.com/embed/",$z);
+			$z = str_replace("[/yt]","' frameborder='0' allowfullscreen></iframe>",$z);
+		$smarty->assign('comment_content', $z); 
 
 		$vars = array('comment_form_label' => '');
 		check_actions('comment_form_label', $vars); 

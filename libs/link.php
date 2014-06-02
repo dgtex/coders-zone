@@ -490,7 +490,7 @@ class Link {
 			$z = str_replace("[code]","<div id='bb_code'>",$z);
 			$z = str_replace("[/code]","</div>",$z);
 			$z = str_replace("[img]","<img src='",$z);
-			$z = str_replace("[/img]","' maxwidth='200px' maxheight='400px'/>",$z);
+			$z = str_replace("[/img]","' style=' max-width:400px; max-height:400px;'/>",$z);
 			$z = str_replace("[yt]","<iframe width='500' height='300' src='//www.youtube.com/embed/",$z);
 			$z = str_replace("[/yt]","' frameborder='0' allowfullscreen></iframe>",$z);
 			$smarty->assign('story_content', $z);
